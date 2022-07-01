@@ -1,30 +1,23 @@
 import { useState } from 'react';
 import './style.css';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import Info from './pages/Info';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
 
   return (
-    <div className="App">
-      <div className="home-div">
+    <Router>
+      <div className="App">
 
-        <div className="home-left">
-          <header className="home-header">
-            <img src="src/assets/chess.png" className="chess-icon" alt="chess icon" />
-            <span id="home-h"> Redberry Knight Cup </span>
-          </header>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/personal-information" element={<Info />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
         </div>
-
-        <div className="home-right">
-          <div className="home-intro">
-            <p className="home-text">chess says <span className="home-text-span">a lot about</span><br></br> who we are </p>
-          </div>
-          <div className="home-btn">
-            <button> Get Started &nbsp; <img src="src/assets/btn-vector.png"></img></button>
-          </div>
-        </div>
-
-      </div>
-    </div>
+    </Router>
   )
 }
 

@@ -19,7 +19,26 @@ body {
   font-family: 'Nunito';
 }
 
-#home-h {
+.errorpage-div {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  color: white;
+  font-size: 30px;
+  transform: translate(-50%);
+}
+
+.errorpage-div p {
+  text-decoration: underline;
+  font-size: 28px;
+}
+
+.errorpage {
+  background: #191919;
+  min-height: 100vh;
+}
+
+.home-h {
   font-size: 25px;
   font-weight: 800;
   color: white;
@@ -31,21 +50,31 @@ body {
   padding: 22px 45px 25px 45px;
 }
 
-.home-div {
+.home-div, .pinfo-div {
   display: flex;
 }
 
-.home-left {
+
+.home-left, .pinfo-left {
   background-image: url('./assets/landing.png');
   background-repeat: no-repeat;
   min-height: 100vh;
   width: 48vw;
 }
 
-.home-right {
+.pinfo-left {
+  background-image: url('./assets/chess-pic.png');
+  background-position: 100% -70%;
+}
+
+.home-right, .pinfo-right {
   min-height: 100vh;
   background: #FD5334;
   width: 52vw;
+}
+
+.pinfo-right {
+  background: #fff;
 }
 
 .home-intro {
@@ -86,6 +115,60 @@ body {
   display: flex;
   cursor: pointer;
 }
+
+.home-btn button:hover {
+  opacity: 0.9;
+  transition: 0.2s;
+}
+
+.pinfo-intro {
+  font-size: 26px;
+  margin-top: 244px;
+  margin-left: 132px;
+}
+
+.pinfo-intro {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-size: 26px;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 50px;
+}
+
+.pinfo-intro-author {
+  color: #E5E6E8;
+  font-size: 24px;
+  margin-top: 25px;
+  font-weight: 500;
+}
+
+.pinfo-h {
+  font-family: 'Open Sans';
+  font-weight: 600;
+  font-size: 17px;
+  color: #212529;
+}
+
+.pinfo-right-header {
+  padding: 29px 45px 27px 45px;
+  border-bottom: 1px solid;
+  border-color: rgba(200, 200, 200, 0.9);
+}
+
+.wizard-div {
+  margin-left: 60px;
+  margin-top: 100px;
+  cursor: text;
+  width: fit-content;
+}
+
+.wizard-img {
+  pointer-events: none;
+  user-select: none;
+}
+
+
 
 
 
