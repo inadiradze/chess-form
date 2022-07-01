@@ -1,0 +1,92 @@
+/*font open suns*/
+@import url('https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap');
+
+/*font nunito*/
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+body {
+  font-family: 'Nunito';
+}
+
+#home-h {
+  font-size: 25px;
+  font-weight: 800;
+  color: white;
+  cursor: pointer;
+}
+
+.home-header {
+  background: #7025FB;
+  padding: 22px 45px 25px 45px;
+}
+
+.home-div {
+  display: flex;
+}
+
+.home-left {
+  background-image: url('./assets/landing.png');
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 48vw;
+}
+
+.home-right {
+  min-height: 100vh;
+  background: #FD5334;
+  width: 52vw;
+}
+
+.home-intro {
+  margin-left: 100px;
+  margin-top: 265px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 80px;
+  line-height: 109px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.home-text-span {
+  font-weight: 700;
+  margin-left: 5px;
+  vertical-align: middle;
+  font-size: 20px;
+  color: #212529;
+}
+
+.home-btn {
+  margin-left: 85px;
+  margin-top: 102px;
+}
+
+.home-btn button {
+  width: 191px;
+  height: 53px;
+  padding: 13px 24px;
+  background: #212529;
+  border-radius: 8px;
+  border: none;
+  font-size: 20px;
+  font-family: "Open Sans";
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+}
+
+
+
+
