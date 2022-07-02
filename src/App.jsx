@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './style.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
-import Info from './pages/Info';
+import Pinfo from './pages/Pinfo';
 import ErrorPage from './pages/ErrorPage';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/personal-information" element={<Info />} />
+            <Route path="/personal-information" element={<Pinfo />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </div>

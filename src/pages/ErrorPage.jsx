@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 
 function ErrorPage(){
 	return (
@@ -7,7 +6,7 @@ function ErrorPage(){
 			<div className="errorpage-div">
 				<h1> Sorry, this page does not exist :(</h1>
 				<br></br>
-				<Link to="/"> <p> Return back to the homepage </p> </Link>
+				<a href="/"> <p> Return back to the homepage </p> </a>
 			</div>
 		</div>
 	)

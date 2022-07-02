@@ -1,5 +1,5 @@
 /*font open suns*/
-@import url('https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 /*font nunito*/
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
@@ -79,7 +79,7 @@ body {
 
 .home-intro {
   margin-left: 100px;
-  margin-top: 265px;
+  margin-top: 250px;
   font-family: 'Nunito';
   font-style: normal;
   font-weight: 800;
@@ -116,8 +116,9 @@ body {
   cursor: pointer;
 }
 
-.home-btn button:hover {
-  opacity: 0.9;
+.home-btn button:hover, .pinfo-buttons button:hover {
+  opacity: 0.95;
+  transform: scale(1.03);
   transition: 0.2s;
 }
 
@@ -158,7 +159,7 @@ body {
 
 .wizard-div {
   margin-left: 60px;
-  margin-top: 100px;
+  margin-top: 60px;
   cursor: text;
   width: fit-content;
 }
@@ -167,6 +168,140 @@ body {
   pointer-events: none;
   user-select: none;
 }
+
+
+.wizard-div {
+  margin-left: -30px;
+  display: flex;
+}
+
+.current {
+  background: #E9FAF1;
+  font-weight: 700;
+}
+
+.not-current {
+  background: #F5F5F5;
+  color: #95939A;
+}
+
+.wizard-div span {
+  font-family: 'Open Sans';
+  font-size: 16px;
+  display: inline-block;
+  margin-left: 100px;
+  margin-top: 15px;
+}
+
+.exp-rect, .pinfo-rect {
+  border: 1px solid #E5E6E8;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  margin-left: 68%;
+  transform: translateX(-50%);
+  border-radius: 8px;
+}
+
+.wizard-hr {
+  border-bottom: 1px solid #B9B4C3;
+  width: 200px;
+  height: 0px;
+  margin-right: -130px;
+  margin-top: 20px;
+  margin-left: -56px;
+  display: inline;
+}
+
+.pinfo-form-header {
+  margin-top: 80px;
+  margin-left: 55px;
+}
+
+.pinfo-form-h h1 {
+  font-family: 'Open Sans';
+  font-weight: 600;
+  font-size: 32px;
+}
+
+.pinfo-form-h p {
+  margin-top: 10px;
+  font-family: 'Open Sans';
+  font-size: 14px;
+  color: #95939A;
+}
+
+.pinfo-form {
+  margin-top: 35px;
+
+}
+
+.pinfo-form input {
+  font-family: 'Open Sans';
+  font-size: 20px;
+  border: none;
+  outline: none;
+  padding-left: 10px;
+  background: white;
+  width: 750px;
+  min-height: 50px;
+  margin-top: 30px;
+  color: #212529;
+  border-bottom: 1px solid #ccc;
+}
+
+.pinfo-form input:focus::placeholder {
+  opacity: 0;
+}
+
+.pinfo-form input:focus{
+  background: #eee;
+}
+
+.pinfo-buttons button {
+  width: 191px;
+  height: 53px;
+  padding: 13px 24px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-family: "Open Sans";
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+}
+
+
+.pinfo-buttons {
+  display: flex;
+  margin-top: 80px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn-back {
+  max-width: 93px;
+  background: white;
+  max-height: 53px;
+  border: 1px solid #212529;
+  color: #212529;
+}
+
+.btn-next {
+  margin-right: 180px;
+  border: none;
+  background: #212529;
+  max-width: 128px;
+  max-height: 53px;
+}
+
+.input-done {
+  display: none;
+  margin-left: -40px;
+}
+
+
 
 
 
