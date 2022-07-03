@@ -55,14 +55,14 @@ body {
 }
 
 
-.home-left, .pinfo-left {
+.home-left, .info-left {
   background-image: url('./assets/landing.png');
   background-repeat: no-repeat;
   min-height: 100vh;
   width: 48vw;
 }
 
-.pinfo-left {
+.info-left {
   background-image: url('./assets/chess-pic.png');
   background-position: 100% -70%;
 }
@@ -122,13 +122,11 @@ body {
   transition: 0.2s;
 }
 
-.pinfo-intro {
+
+.info-intro {
   font-size: 26px;
   margin-top: 244px;
   margin-left: 132px;
-}
-
-.pinfo-intro {
   font-family: 'Nunito';
   font-style: italic;
   font-size: 26px;
@@ -137,7 +135,7 @@ body {
   line-height: 50px;
 }
 
-.pinfo-intro-author {
+.info-intro-author {
   color: #E5E6E8;
   font-size: 24px;
   margin-top: 25px;
@@ -157,12 +155,6 @@ body {
   border-color: rgba(200, 200, 200, 0.9);
 }
 
-.wizard-div {
-  margin-left: 60px;
-  margin-top: 60px;
-  cursor: text;
-  width: fit-content;
-}
 
 .wizard-img {
   pointer-events: none;
@@ -171,8 +163,11 @@ body {
 
 
 .wizard-div {
-  margin-left: -30px;
+  margin-top: 60px;
+  margin-left: -40px;
   display: flex;
+  cursor: default;
+  width: fit-content;
 }
 
 .current {
@@ -187,6 +182,7 @@ body {
 
 .wizard-div span {
   font-family: 'Open Sans';
+  cursor: text;
   font-size: 16px;
   display: inline-block;
   margin-left: 100px;
@@ -205,6 +201,12 @@ body {
   border-radius: 8px;
 }
 
+.done-vector {
+  margin-top: 4px;
+  width: 22.84px;
+  height:  12.21px;
+}
+
 .wizard-hr {
   border-bottom: 1px solid #B9B4C3;
   width: 200px;
@@ -215,7 +217,7 @@ body {
   display: inline;
 }
 
-.pinfo-form-header {
+.pinfo-form-div {
   margin-top: 80px;
   margin-left: 55px;
 }
@@ -250,6 +252,15 @@ body {
   margin-top: 30px;
   color: #212529;
   border-bottom: 1px solid #ccc;
+}
+
+.error-input input {
+  color: #DC3545;
+  background: rgba(220, 53, 69, 0.1);
+}
+
+.error-input input::placeholder {
+  color: rgba(220, 53, 69, 0.7);
 }
 
 .pinfo-form input:focus::placeholder {
@@ -297,10 +308,56 @@ body {
 }
 
 .input-done {
-  display: none;
   margin-left: -40px;
 }
 
+.checkMark-div {
+  display: inline-flex;
+}
+
+::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  display: none;
+}
+
+
+.error-popup {
+  font-family: 'Open Sans';
+  width: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  position: absolute;
+  width: 350px;
+  left: 1531px;
+  top: 226px;
+
+}
+
+.error-h {
+  padding: 8px 6px 8px 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+}
+
+.error-popup p {
+  padding: 12px 6px 12px 12px;
+  color: #212529;
+}
+
+.error-h span {
+  vertical-align: top;
+  color: #DC3545;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.close-btn {
+  margin-top: 10px;
+  float: right;
+  margin-right: 16px;
+  cursor: pointer; 
+}
 
 
 
