@@ -22,6 +22,7 @@ function PinfoForm(){
 	const [dobValid, setDobValid] = useState();
 	const [numberValid, setNumberValid] = useState();
 	const [allValid, setAllValid] = useState();
+	const [submitted, setSubmitted] = useState();
 
 	const [error, setError] = useState();
 
@@ -57,6 +58,10 @@ function PinfoForm(){
 		localStorage.getItem("number") !== null && setNumber(localStorage.getItem("number"));
 
 		localStorage.getItem("dob") !== null && setDob(localStorage.getItem("dob"));
+
+		if(localStorage.getItem('pinfo-submitted') == 'true'){
+			setNameValid(true); setNumberValid(true); setDobValid(true); setEmailValid(true);
+		}
 	}
 
 	function checkInputs(){
@@ -133,7 +138,7 @@ function PinfoForm(){
 		localStorage.setItem("email", emailRef.current.value);
 		localStorage.setItem("number", numberRef.current.value);
 		localStorage.setItem("dob", dobRef.current.value);
-		localStorage.setItem("pinfo-started", true);
+		
 	}
 
 	function checkForm(){
@@ -141,8 +146,11 @@ function PinfoForm(){
 		checkInputs();
 
 		if(nameRef.current.checkValidity() && emailRef.current.checkValidity() && numberRef.current.checkValidity() && dobRef.current.checkValidity()) {
+			localStorage.setItem('pinfo-submitted', true);
 			navigate("/experience-information");
 			
+		}else{
+			localStorage.removeItem('pinfo-submitted');
 		}
 	}
 
@@ -181,7 +189,7 @@ function PinfoForm(){
 						<input value={name} onChange={(e)=>{setName(e.target.value)}}type="text" id="name" name="name" ref={nameRef} placeholder='&nbsp;' minLength="2" pattern="[a-zA-Z ]+" required autoComplete="off"></input>
 						<span className="placeholder">Name <span className="input-warn">*</span></span>
 
-						{nameValid  && <CheckMark /> }
+						{nameValid && <CheckMark /> }
 						
 
 					</div>
