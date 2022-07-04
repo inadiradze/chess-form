@@ -50,21 +50,25 @@ body {
   padding: 22px 45px 25px 45px;
 }
 
-.home-div, .pinfo-div {
+.home-div, .pinfo-div, .expinfo-div {
   display: flex;
 }
 
 
-.home-left, .info-left {
+.home-left, .pinfo-left, .expinfo-left {
   background-image: url('./assets/landing.png');
   background-repeat: no-repeat;
   min-height: 100vh;
   width: 48vw;
 }
 
-.info-left {
+.pinfo-left {
   background-image: url('./assets/chess-pic.png');
   background-position: 100% -70%;
+}
+
+.expinfo-left {
+  background-image: url('./assets/exp-pic.png');
 }
 
 .home-right, .pinfo-right {
@@ -123,7 +127,7 @@ body {
 }
 
 
-.info-intro {
+.pinfo-intro, .expinfo-intro {
   font-size: 26px;
   margin-top: 244px;
   margin-left: 132px;
@@ -133,23 +137,34 @@ body {
   font-weight: 800;
   text-transform: uppercase;
   line-height: 50px;
+  width: fit-content;
 }
 
-.info-intro-author {
+.pinfo-intro-author, .expinfo-intro-author {
   color: #E5E6E8;
   font-size: 24px;
   margin-top: 25px;
   font-weight: 500;
 }
 
-.pinfo-h {
+.expinfo-intro {
+  margin-top: 150px;
+}
+
+.expinfo-intro-author {
+  color: #093F68;
+  float: right;
+}
+
+.info-h {
   font-family: 'Open Sans';
   font-weight: 600;
   font-size: 17px;
   color: #212529;
+  text-transform: capitalize;
 }
 
-.pinfo-right-header {
+.info-right-header {
   padding: 29px 45px 27px 45px;
   border-bottom: 1px solid;
   border-color: rgba(200, 200, 200, 0.9);
@@ -168,6 +183,10 @@ body {
   display: flex;
   cursor: default;
   width: fit-content;
+}
+
+.expinfo-right {
+  width: 100%;
 }
 
 .current {
@@ -217,18 +236,18 @@ body {
   display: inline;
 }
 
-.pinfo-form-div {
+.info-form-div {
   margin-top: 80px;
   margin-left: 55px;
 }
 
-.pinfo-form-h h1 {
+.info-form-h h1 {
   font-family: 'Open Sans';
   font-weight: 600;
   font-size: 32px;
 }
 
-.pinfo-form-h p {
+.info-form-h p {
   margin-top: 10px;
   font-family: 'Open Sans';
   font-size: 14px;

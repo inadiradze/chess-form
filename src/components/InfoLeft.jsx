@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import Header from './Header';
 
-function InfoLeft(){
+function InfoLeft(classname, quote, author){
+
 	return (
-        <div className="info-left">
+        <div className={`${classname.classname}-left`}>
       		<Header />
-      		<div className="info-intro">
-          		<p> “When you see a good move, <br></br> look for a better one.” </p>
+      		<div className={`${classname.classname}-intro`}>
+          		<p> {classname.quote} </p>
           		
-          		<p className="info-intro-author"> -Emanuel Lasker </p>
+          		<p className={`${classname.classname}-intro-author`}> -{classname.author} </p>
       		</div>
         </div>
     )

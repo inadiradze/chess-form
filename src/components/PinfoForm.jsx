@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef, createContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import CheckMark from './CheckMark';
 import ErrorPopup from './ErrorPopup';
+import FormHeader from './FormHeader';
+
+
 
 export const Context = createContext();
 
@@ -114,7 +117,7 @@ function PinfoForm(){
 		checkInputs();
 
 		if(nameRef.current.checkValidity() && emailRef.current.checkValidity() && numberRef.current.checkValidity() && dobRef.current.checkValidity()) {
-			navigate("/experience-form");
+			navigate("/experience-information");
 			
 		}
 	}
@@ -122,11 +125,7 @@ function PinfoForm(){
 	
 
 	return (
-		<div className="pinfo-right">
-        	<header className="pinfo-right-header">
-        		<h1 className="pinfo-h"> Start Creating Your Account </h1>
-    		</header>
-
+		<div>
     		<div className="wizard-div">
 
     			<div className="wizard-pinfo-div">
@@ -140,11 +139,12 @@ function PinfoForm(){
 	        		<span className="wizard-exp">Chess experience</span>
         		</div>
     		</div>
-			<div className="pinfo-form-div">
-				<header className="pinfo-form-h">
-					<h1> Personal information</h1>
-					<p> This Is Basic Information Fields </p>
-				</header>
+			<div className="info-form-div">
+				
+				<div>
+					<FormHeader header={"Personal information"} />
+				</div>
+
 				<div onChange={()=>{
 					storeInfo()}} className="pinfo-form">
 

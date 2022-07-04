@@ -3,6 +3,9 @@ import Header from '../components/Header';
 import { Link } from "react-router-dom";
 
 function Home(){
+
+	document.title = "Redberry Chess | Home";
+	
 	return (
 		<div className="home-div">
 
