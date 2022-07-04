@@ -2,7 +2,6 @@ import React from 'react';
 import InfoLeft from '../components/InfoLeft';
 import Wizard from '../components/Wizard';
 import InfoHeader from '../components/InfoHeader';
-import FormHeader from '../components/FormHeader';
 import ExpForm from '../components/ExpForm';
 
 function ExpInfo(){

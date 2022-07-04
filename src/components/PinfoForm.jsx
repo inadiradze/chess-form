@@ -11,6 +11,7 @@ export const Context = createContext();
 function PinfoForm(){
 
 	const navigate = useNavigate();
+	const [started, setStarted] = useState(false);
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [number, setNumber] = useState("");
@@ -24,6 +25,7 @@ function PinfoForm(){
 
 	const [error, setError] = useState();
 
+	const pinfoRect = useRef();
 	const nameRef = useRef();
 	const emailRef = useRef();
 	const numberRef = useRef();
@@ -35,7 +37,17 @@ function PinfoForm(){
 
 	useEffect( ()=> {
 		checkAllInputs();
+		checkIfStarted();
 	});
+
+	useEffect( ()=> {
+		if(started){
+			pinfoRect.current.classList.add('current');
+		}else{
+			pinfoRect.current.classList.remove('current');
+		}
+	}, [started])
+
 
 	function showSavedInfo(){
 		localStorage.getItem("name") !== null && setName(localStorage.getItem("name"));
@@ -105,11 +117,23 @@ function PinfoForm(){
 		}
 	}
 
+	function checkIfStarted(){
+		const inputFields = document.querySelectorAll("input");
+		const startedInputs = Array.from(inputFields).filter( input => input.defaultValue);
+
+		if(startedInputs.length > 0){
+			setStarted(true);
+		}else{
+			setStarted(false);
+		}
+	}
+
 	function storeInfo(){
 		localStorage.setItem("name", nameRef.current.value);
 		localStorage.setItem("email", emailRef.current.value);
 		localStorage.setItem("number", numberRef.current.value);
 		localStorage.setItem("dob", dobRef.current.value);
+		localStorage.setItem("pinfo-started", true);
 	}
 
 	function checkForm(){
@@ -129,7 +153,7 @@ function PinfoForm(){
     		<div className="wizard-div">
 
     			<div className="wizard-pinfo-div">
-        			<div className="pinfo-rect current">{!allValid ? '1' : <img className="done-vector" src="src/assets/done-vector.png"></img>}</div>
+        			<div ref={pinfoRect}className="pinfo-rect">{!allValid ? '1' : <img className="done-vector" src="src/assets/done-vector.png"></img>}</div>
 	        		<span className="wizard-pinfo">Personal information</span>
 
         		</div>
@@ -153,22 +177,30 @@ function PinfoForm(){
 						</Context.Provider>}
 
 					<div className={nameValid != false ? "name-div" : "name-div error-input"}>
-						<input value={name} onChange={(e)=>{setName(e.target.value)}}type="text" id="name" name="name" ref={nameRef} placeholder="Name " minLength="2" pattern="[a-zA-Z ]+" required autoComplete="off"></input>
+						
+						<input value={name} onChange={(e)=>{setName(e.target.value)}}type="text" id="name" name="name" ref={nameRef} placeholder='&nbsp;' minLength="2" pattern="[a-zA-Z ]+" required autoComplete="off"></input>
+						<span className="placeholder">Name <span className="input-warn">*</span></span>
 
 						{nameValid  && <CheckMark /> }
 						
 
 					</div>
 					<div className={emailValid != false ? "email-div" : "email-div error-input"}>
-						<input value={email} ref={emailRef} onChange={(e)=>{setEmail(e.target.value)}} type="email" id="email" name="email" placeholder="Email address " pattern="[a-z0-9._%+-]+@redberry.ge" required autoComplete="off" ></input>
+						
+						<input value={email} ref={emailRef} onChange={(e)=>{setEmail(e.target.value)}} type="email" placeholder='&nbsp;' id="email" name="email"pattern="[a-z0-9._%+-]+@redberry.ge" required autoComplete="off" ></input>
+						<span className="placeholder">Email address <span className="input-warn">*</span></span>
 						{emailValid && <CheckMark />}
 					</div>
 					<div className={numberValid != false ? "number-div" : "number-div error-input"}>
-						<input value={number} ref={numberRef} onChange={(e)=>{setNumber(e.target.value)}}type="tel" id="number" name="number" placeholder="Phone number" required pattern='[5]{1}[0-9]{8}'></input>
+						
+						<input placeholder='&nbsp;' value={number} ref={numberRef} onChange={(e)=>{setNumber(e.target.value)}}type="tel" id="number" name="number" required pattern='[5]{1}[0-9]{8}'></input>
+						<span className="placeholder">Phone number <span className="input-warn">*</span></span>
 						{numberValid && <CheckMark />}
 					</div>
 					<div className={dobValid != false ? "dob-div" : "dob-div error-input"}>
-						<input value={dob} ref={dobRef} onChange={(e)=>{setDob(e.target.value)}}type={!dob ? "text" : "date"}   onFocus={ (e)=>  e.currentTarget.type= 'date'} min="1900-01-01" max={new Date().toISOString().split("T")[0]} id="date" name="date" pattern='[0-9/]{3}[0-9/]{3}[0-9]{4}'minLength="6" required placeholder="Date of birth "></input>
+						
+						<input placeholder='&nbsp;' value={dob} ref={dobRef} onChange={(e)=>{setDob(e.target.value)}}type={!dob ? "text" : "date"}   onFocus={ (e)=>  e.currentTarget.type= 'date'} min="1900-01-01" max={new Date().toISOString().split("T")[0]} id="date" name="date" pattern='[0-9/]{3}[0-9/]{3}[0-9]{4}'minLength="6" required></input>
+						<span className="placeholder">Date of birth <span className="input-warn">*</span></span>
 						{dobValid && <CheckMark />}
 					</div>
 					<div className="pinfo-buttons">

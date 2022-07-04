@@ -278,16 +278,37 @@ body {
   background: rgba(220, 53, 69, 0.1);
 }
 
-.error-input input::placeholder {
-  color: rgba(220, 53, 69, 0.7);
+.error-input input + .placeholder {
+  color: rgba(220, 53, 69);
 }
 
-.pinfo-form input:focus::placeholder {
-  opacity: 0;
+
+.pinfo-form .placeholder {
+  pointer-events: none;
+  font-family: 'Open Sans';
+  font-size: 20px;
+  position: absolute;
+  margin-top: -40px;
+  margin-left: 10px;
+  display: flex;
 }
 
 .pinfo-form input:focus{
   background: #eee;
+}
+
+.pinfo-form input:focus + .placeholder{
+  display: none;
+}
+
+.pinfo-form input:not(:placeholder-shown) ~ .placeholder {
+  display: none;
+}
+
+.input-warn {
+  margin-left: 10px;
+  color: #DC3545;
+
 }
 
 .pinfo-buttons button {
@@ -342,14 +363,14 @@ body {
 
 .error-popup {
   font-family: 'Open Sans';
-  width: 300px;
+ 
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   position: absolute;
   width: 350px;
-  left: 1531px;
-  top: 226px;
+  left: 79.7vw;
+  top: 21vh;
 
 }
 
