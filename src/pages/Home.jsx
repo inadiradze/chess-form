@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from '../components/Header';
 import { Link } from "react-router-dom";
+import nextVector from '/assets/btn-vector.png';
+
 
 function Home(){
 
@@ -19,7 +21,7 @@ function Home(){
 	          </div>
 	          <div className="home-btn">
 	            <Link to="/personal-information">
-	            	<button> Get Started &nbsp; <img src="./assets/btn-vector.png"></img></button>
+	            	<button> Get Started &nbsp; <img src={nextVector}></img></button>
             	</Link>
 	          </div>
 	        </div>

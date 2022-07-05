@@ -2,6 +2,8 @@ import React from 'react';
 import InfoLeft from '../components/InfoLeft';
 import InfoHeader from '../components/InfoHeader';
 import ExpForm from '../components/ExpForm';
+import DoneVector from '/assets/done-vector.png';
+
 
 function ExpInfo(){
 
@@ -13,7 +15,7 @@ function ExpInfo(){
 		return (
 			<div className="wizard-div">
 				<div className="wizard-pinfo-div">
-	    			<div className="pinfo-rect current"><img className="done-vector" src="./assets/done-vector.png"></img></div>
+	    			<div className="pinfo-rect current"><img className="done-vector" src={DoneVector}></img></div>
 	        		<span className="wizard-pinfo">Personal information</span>
 
 	    		</div>
