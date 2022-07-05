@@ -4,7 +4,7 @@ function CheckMark() {
 
 	return (
 		<div className="checkMark-div">
-			<img className="input-done"src="src/assets/input-done.png"></img>
+			<img className="input-done"src="./assets/input-done.png"></img>
 		</div>
 	)
 }

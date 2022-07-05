@@ -13,7 +13,7 @@ function ExpInfo(){
 		return (
 			<div className="wizard-div">
 				<div className="wizard-pinfo-div">
-	    			<div className="pinfo-rect current"><img className="done-vector" src="src/assets/done-vector.png"></img></div>
+	    			<div className="pinfo-rect current"><img className="done-vector" src="./assets/done-vector.png"></img></div>
 	        		<span className="wizard-pinfo">Personal information</span>
 
 	    		</div>

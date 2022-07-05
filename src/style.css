@@ -56,19 +56,19 @@ body {
 
 
 .home-left, .pinfo-left, .expinfo-left {
-  background-image: url('./assets/landing.png');
+  background-image: url('../assets/landing.png');
   background-repeat: no-repeat;
   min-height: 100vh;
   width: 48vw;
 }
 
 .pinfo-left {
-  background-image: url('./assets/chess-pic.png');
+  background-image: url('../assets/chess-pic.png');
   background-position: 100% -70%;
 }
 
 .expinfo-left {
-  background-image: url('./assets/exp-pic.png');
+  background-image: url('../assets/exp-pic.png');
 }
 
 .home-right, .pinfo-right {

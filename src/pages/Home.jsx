@@ -19,7 +19,7 @@ function Home(){
 	          </div>
 	          <div className="home-btn">
 	            <Link to="/personal-information">
-	            	<button> Get Started &nbsp; <img src="src/assets/btn-vector.png"></img></button>
+	            	<button> Get Started &nbsp; <img src="./assets/btn-vector.png"></img></button>
             	</Link>
 	          </div>
 	        </div>

@@ -20,9 +20,9 @@ function ErrorPopup(){
 
 		<div ref={popupRef} className="error-popup">
 			<div className="error-h">
-				<img className="error-vector" src="src/assets/error-vector.png"></img>
+				<img className="error-vector" src="./assets/error-vector.png"></img>
 				<span> Invalid {error.input} </span>
-				<img className="close-btn" onClick={()=> closeError()} src="src/assets/close-btn.png"></img>
+				<img className="close-btn" onClick={()=> closeError()} src="./assets/close-btn.png"></img>
 			</div>
 			<p className="error-text"> {error.error } </p>
 		</div>

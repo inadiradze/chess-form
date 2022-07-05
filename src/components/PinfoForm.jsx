@@ -161,7 +161,7 @@ function PinfoForm(){
     		<div className="wizard-div">
 
     			<div className="wizard-pinfo-div">
-        			<div ref={pinfoRect}className="pinfo-rect">{!allValid ? '1' : <img className="done-vector" src="src/assets/done-vector.png"></img>}</div>
+        			<div ref={pinfoRect}className="pinfo-rect">{!allValid ? '1' : <img className="done-vector" src="./assets/done-vector.png"></img>}</div>
 	        		<span className="wizard-pinfo">Personal information</span>
 
         		</div>
@@ -213,7 +213,7 @@ function PinfoForm(){
 					</div>
 					<div className="pinfo-buttons">
 						<Link to="/"><button className="btn-back">Back</button></Link>
-						<button onClick={()=> {checkForm()}} className="btn-next">Next &nbsp; <img src="src/assets/btn-vector.png"></img> </button>
+						<button onClick={()=> {checkForm()}} className="btn-next">Next &nbsp; <img src="./assets/btn-vector.png"></img> </button>
 					</div>
 					
 				</div>
