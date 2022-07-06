@@ -35,6 +35,11 @@ function PinfoForm(){
 	const dobRef = useRef();
 
 	useEffect( () => {
+		if(localStorage.getItem("pinfo-started") == 'true'){
+			setTimeout(()=>{
+				checkInputs();
+			}, 100)
+		}
 		showSavedInfo();
 	}, []);
 
@@ -61,9 +66,6 @@ function PinfoForm(){
 
 		localStorage.getItem("dob") !== null && setDob(localStorage.getItem("dob"));
 
-		if(localStorage.getItem('pinfo-submitted') == 'true'){
-			setNameValid(true); setNumberValid(true); setDobValid(true); setEmailValid(true);
-		}
 	}
 
 	function checkInputs(){
@@ -119,8 +121,10 @@ function PinfoForm(){
 
 		if(validInputs.length == inputFields.length){
 			setAllValid(true);
+			localStorage.setItem("pinfo-done", true);
 		}else{
 			setAllValid(false);
+			localStorage.removeItem("pinfo-done");
 		}
 	}
 
@@ -130,8 +134,10 @@ function PinfoForm(){
 
 		if(startedInputs.length > 0){
 			setStarted(true);
+			localStorage.setItem("pinfo-started", true);
 		}else{
 			setStarted(false);
+			localStorage.removeItem("pinfo-started");
 		}
 	}
 
@@ -148,11 +154,7 @@ function PinfoForm(){
 		checkInputs();
 
 		if(nameRef.current.checkValidity() && emailRef.current.checkValidity() && numberRef.current.checkValidity() && dobRef.current.checkValidity()) {
-			localStorage.setItem('pinfo-submitted', true);
-			navigate("/experience-information");
-			
-		}else{
-			localStorage.removeItem('pinfo-submitted');
+			navigate("/experience-information");	
 		}
 	}
 
@@ -163,7 +165,7 @@ function PinfoForm(){
     		<div className="wizard-div">
 
     			<div className="wizard-pinfo-div">
-        			<div ref={pinfoRect}className="pinfo-rect">{!allValid ? '1' : <img className="done-vector" src={DoneVector}></img>}</div>
+        			<div ref={pinfoRect}className="pinfo-rect">{!allValid ? <strong>1</strong> : <img className="done-vector" src={DoneVector}></img>}</div>
 	        		<span className="wizard-pinfo">Personal information</span>
 
         		</div>
@@ -188,7 +190,7 @@ function PinfoForm(){
 
 					<div className={nameValid != false ? "name-div" : "name-div error-input"}>
 						
-						<input value={name} onChange={(e)=>{setName(e.target.value)}}type="text" id="name" name="name" ref={nameRef} placeholder='&nbsp;' minLength="2" pattern="[a-zA-Z ]+" required autoComplete="off"></input>
+						<input value={name} onChange={(e)=>{setName(e.target.value)}}type="text" id="name" name="name" ref={nameRef} placeholder='&nbsp;' minLength="2" pattern="[a-zA-Z ]{2,}" required autoComplete="off"></input>
 						<span className="placeholder">Name <span className="input-warn">*</span></span>
 
 						{nameValid && <CheckMark /> }

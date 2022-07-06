@@ -11,17 +11,18 @@ function ExpInfo(){
 
 	const quote =  <> “Many have become chess masters; <br></br> no one has become the master of chess.” </>;
 
+
 	function Wizard(){
 		return (
 			<div className="wizard-div">
 				<div className="wizard-pinfo-div">
-	    			<div className="pinfo-rect current"><img className="done-vector" src={DoneVector}></img></div>
+	    			<div className={localStorage.getItem("pinfo-started") == 'true' ? "pinfo-rect done" : "pinfo-rect not-current"}>{localStorage.getItem("pinfo-done") == 'true' ? <img className="done-vector" src={DoneVector}></img> : '1'}</div>
 	        		<span className="wizard-pinfo">Personal information</span>
 
 	    		</div>
 	    		<div className="wizard-hr"></div>
 	    		<div className="wizard-exp-div">
-	        		<div className='exp-rect'>2</div>
+	        		<div className='exp-rect'><strong>2</strong></div>
 	        		<span className="wizard-exp">Chess experience</span>
 	    		</div>
 			</div>
