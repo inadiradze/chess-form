@@ -19,6 +19,7 @@ function ExpForm(){
 	const expRectRef = useRef();
 	const characterphRef = useRef();
 	const characterRef = useRef();
+	const questionRef = useRef();
 
 	useEffect( () => {
 		fetchCharacters();
@@ -26,6 +27,7 @@ function ExpForm(){
 
 	useEffect( () => {
 		showLevelValue();
+		showCharacterValue();
 	});
 
 
@@ -40,9 +42,24 @@ function ExpForm(){
 		}
 	}
 
+	function showCharacterValue(){
+		if(localStorage.getItem("character") !== null){
+			setCharacterValue(localStorage.getItem("character"));
+			characterphRef.current.textContent=localStorage.getItem("character");
+		}
+	}
+
 	function handleListClick(e){
 		setShowLevelBox(false); 
 		vectorRef.current.classList.remove("rotate"); 
+		questionRef.current.classList.remove("no-overlay")
+	}
+
+	function handleCharacterClick(e){
+		setShowCharacterBox(false); 
+		characterVectorRef.current.classList.remove("rotate"); 
+		localStorage.setItem("character", e.currentTarget.textContent);
+		localStorage.setItem("character-id", e.currentTarget.id);
 	}
 
 	function handleSelection(e){
@@ -61,17 +78,29 @@ function ExpForm(){
 
 	function CharacterBox(){
 		return (
-			<div onClick={(e)=> handleCharacterClick(e)} className="character-select-list">
+			<div className="character-select-list">
 				<div className="character-selection">
 					<span className="character-total">(Total {characters.length})</span>
 					{characters.map((content, index) => {
 		                return (
-						<div key={index} className="character-div">
-							<p key={content.id}> {content.name}</p>
+						<div onClick={(e) => {handleCharacterClick(e)}}key={index} id={index} className="character-div">
+							<p> {content.name}</p>
 							<img className="character-img" src={`https://chess-tournament-api.devtest.ge/${content.image}`}></img>
 						</div>
 					)})}
 				</div>
+			</div>
+		)
+	}
+
+	function Question(){
+		return (
+			<div className="question">
+				<p> Have you participated in the Redberry Championship? <span className="input-warn">*</span></p>
+				<input value="yes" required type="radio" name="question" id="question-yes"></input>
+				<label htmlFor="question-yes">Yes</label>
+				<input value="no" required type="radio" name="question" id="question-no"></input>
+				<label htmlFor="question-no">No</label>
 			</div>
 		)
 	}
@@ -103,7 +132,7 @@ function ExpForm(){
 					<div className="exp-info-list">
 						<span ref={levelphRef}className="exp-placeholder">Level of knowledge <span className="input-warn">*</span></span>
 						<input ref={levelRef} value={levelValue} disabled className="exp-level-input"></input>
-						<img className="select-vector" ref={vectorRef} onClick={(e)=> {setShowLevelBox(!showLevelBox); e.currentTarget.classList.toggle("rotate")}} src={SelectVector}></img>
+						<img className="select-vector" ref={vectorRef} onClick={(e)=> {setShowLevelBox(!showLevelBox); e.currentTarget.classList.toggle("rotate"); questionRef.current.classList.toggle("no-overlay")}} src={SelectVector}></img>
 						{showLevelBox && <LevelBox />}
 					</div>
 
@@ -113,7 +142,11 @@ function ExpForm(){
 						<img className="select-vector" ref={characterVectorRef} onClick={(e)=> {setShowCharacterBox(!showCharacterBox); e.currentTarget.classList.toggle("rotate")}} src={SelectVector}></img>
 						{showCharacterBox && <CharacterBox />}
 						</div>
+						<div ref={questionRef}className="question-div">
+							<Question />
+						</div>
 				</div>
+					
 			</div>
 		</div>
 	)
