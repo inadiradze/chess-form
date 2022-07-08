@@ -17,7 +17,7 @@ function Pinfo(){
 			</div>
 
 			<div className="pinfo-right">
-				<InfoHeader header={'Start creating your account'} />
+				<InfoHeader header={'Start creating your account'}/>
 				<PinfoForm />
 			</div>
 	       

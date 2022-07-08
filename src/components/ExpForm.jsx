@@ -1,7 +1,9 @@
 import React, {useState, useRef, useEffect} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import FormHeader from './FormHeader';
 import SelectVector from '/assets/select-vector.png';
 import DoneVector from '/assets/done-vector.png';
+import NextVector from '/assets/btn-vector.png';
 
 
 function ExpForm(){
@@ -20,6 +22,8 @@ function ExpForm(){
 	const characterphRef = useRef();
 	const characterRef = useRef();
 	const questionRef = useRef();
+	const noRef = useRef();
+	const yesRef = useRef();
 
 	useEffect( () => {
 		fetchCharacters();
@@ -28,6 +32,7 @@ function ExpForm(){
 	useEffect( () => {
 		showLevelValue();
 		showCharacterValue();
+		showAnswer();
 	});
 
 
@@ -58,12 +63,29 @@ function ExpForm(){
 	function handleCharacterClick(e){
 		setShowCharacterBox(false); 
 		characterVectorRef.current.classList.remove("rotate"); 
+		questionRef.current.classList.remove("no-overlay")
 		localStorage.setItem("character", e.currentTarget.textContent);
 		localStorage.setItem("character-id", e.currentTarget.id);
 	}
 
 	function handleSelection(e){
 		localStorage.setItem("level", e.currentTarget.textContent);
+	}
+
+	function checkQuestion(e){
+		if(e.currentTarget.value == 'yes'){
+			localStorage.setItem("answer", 'true');
+		}else{
+			localStorage.setItem("answer", 'false');
+		}
+	}
+
+	function showAnswer(){
+		if(localStorage.getItem("answer") == 'true'){
+			yesRef.current.checked=true;
+		}else{
+			noRef.current.checked=true;
+		}
 	}
 
 	function LevelBox(){
@@ -96,10 +118,10 @@ function ExpForm(){
 	function Question(){
 		return (
 			<div className="question">
-				<p> Have you participated in the Redberry Championship? <span className="input-warn">*</span></p>
-				<input value="yes" required type="radio" name="question" id="question-yes"></input>
+				<p className="question-p"> Have you participated in the Redberry Championship? <span className="input-warn">*</span></p>
+				<input ref={yesRef} onClick={(e) => checkQuestion(e)} value="yes" required type="radio" name="question" id="question-yes"></input>
 				<label htmlFor="question-yes">Yes</label>
-				<input value="no" required type="radio" name="question" id="question-no"></input>
+				<input ref={noRef} onClick={(e) => checkQuestion(e)} value="no" required type="radio" name="question" id="question-no"></input>
 				<label htmlFor="question-no">No</label>
 			</div>
 		)
@@ -131,22 +153,25 @@ function ExpForm(){
 				<div className="exp-info-form">
 					<div className="exp-info-list">
 						<span ref={levelphRef}className="exp-placeholder">Level of knowledge <span className="input-warn">*</span></span>
-						<input ref={levelRef} value={levelValue} disabled className="exp-level-input"></input>
+						<input ref={levelRef} disabled className="exp-level-input"></input>
 						<img className="select-vector" ref={vectorRef} onClick={(e)=> {setShowLevelBox(!showLevelBox); e.currentTarget.classList.toggle("rotate"); questionRef.current.classList.toggle("no-overlay")}} src={SelectVector}></img>
 						{showLevelBox && <LevelBox />}
 					</div>
 
 					<div className="character-info-list">
 						<span ref={characterphRef}className="character-placeholder">Choose your character <span className="input-warn">*</span></span>
-						<input ref={characterRef} value={characterValue} disabled className="character-input"></input>
-						<img className="select-vector" ref={characterVectorRef} onClick={(e)=> {setShowCharacterBox(!showCharacterBox); e.currentTarget.classList.toggle("rotate")}} src={SelectVector}></img>
+						<input ref={characterRef} disabled className="character-input"></input>
+						<img className="select-vector" ref={characterVectorRef} onClick={(e)=> {setShowCharacterBox(!showCharacterBox); e.currentTarget.classList.toggle("rotate"); questionRef.current.classList.toggle("no-overlay")}} src={SelectVector}></img>
 						{showCharacterBox && <CharacterBox />}
 						</div>
 						<div ref={questionRef}className="question-div">
 							<Question />
 						</div>
 				</div>
-					
+					<div className="pinfo-buttons exp-buttons">
+						<Link to="/personal-information"><button className="btn-back exp-back">Back</button></Link>
+						<button className="btn-next btn-done">Done</button>
+					</div>
 			</div>
 		</div>
 	)
