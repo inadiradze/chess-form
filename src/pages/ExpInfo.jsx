@@ -2,7 +2,6 @@ import React from 'react';
 import InfoLeft from '../components/InfoLeft';
 import InfoHeader from '../components/InfoHeader';
 import ExpForm from '../components/ExpForm';
-import DoneVector from '/assets/done-vector.png';
 
 
 function ExpInfo(){
@@ -12,22 +11,7 @@ function ExpInfo(){
 	const quote =  <> “Many have become chess masters; <br></br> no one has become the master of chess.” </>;
 
 
-	function Wizard(){
-		return (
-			<div className="wizard-div">
-				<div className="wizard-pinfo-div">
-	    			<div className={localStorage.getItem("pinfo-started") == 'true' ? "pinfo-rect done" : "pinfo-rect not-current"}>{localStorage.getItem("pinfo-done") == 'true' ? <img className="done-vector" src={DoneVector}></img> : '1'}</div>
-	        		<span className="wizard-pinfo">Personal information</span>
-
-	    		</div>
-	    		<div className="wizard-hr"></div>
-	    		<div className="wizard-exp-div">
-	        		<div className='exp-rect'><strong>2</strong></div>
-	        		<span className="wizard-exp">Chess experience</span>
-	    		</div>
-			</div>
-		)
-	}
+	
 
 	return (
 		<div className="expinfo-div">
@@ -39,7 +23,6 @@ function ExpInfo(){
 			<div className="expinfo-right">
 
 				<InfoHeader header={'First step is done, continue to finish onboarding'} />
-				<Wizard />
 				<ExpForm />
 			</div>
 	       

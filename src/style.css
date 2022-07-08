@@ -312,7 +312,7 @@ body {
 .input-warn {
   margin-left: 10px;
   color: #DC3545;
-
+  vertical-align: middle;
 }
 
 .pinfo-buttons button {
@@ -405,9 +405,10 @@ body {
 
 .exp-info-form {
   margin-top: 100px;
+  display: flex;
 }
 
-.exp-level-input {
+.exp-level-input, .character-input {
   width: 392px;
   height: 46px;
   background: #FFFFFF;
@@ -416,7 +417,7 @@ body {
   border-radius: 4px;
 }
 
-.exp-placeholder {
+.exp-placeholder, .character-placeholder {
   font-family: 'Open Sans';
   font-size: 20px;
   color: #212529;
@@ -425,12 +426,16 @@ body {
   margin-top: 8.4px;
 }
 
-.select-vector {
-  margin-left: -40px;
-  cursor: pointer;
+.character-placeholder {
+  position: absolute; 
 }
 
-.select-list {
+.character-info-list {
+  position: absolute;
+  margin-left: 420px;
+}
+
+.select-list, .character-select-list {
   display: block;
   margin-top: 10px;
   width: 392px;
@@ -441,29 +446,89 @@ body {
   border-radius: 4px;
 }
 
+.character-select-list {
+  height: inherit;
+  border-bottom: 20px solid transparent;
+  font-family: 'Open Sans';
+}
+
+
 .select-list p:first-child {
   margin-top: 15px;
 }
 
-.select-list p {
+.select-list p, .character-selection {
   cursor: pointer;
-  padding: 12px;
+  padding: 12.5px;
   padding-left: 20px;
   font-family: 'Open Sans';
   font-size: 20px;
 }
 
+.character-selection {
+  max-height: 420px;
+  overflow: hidden;
+  overflow-y: auto;
+}
 
-.select-list p:hover {
+.character-div {
+  cursor: default;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.character-div p {
+  margin-top: 30px;
+  padding-bottom: 20px;
+}
+
+.character-img {
+  width: 130px;
+  height: 110px;
+  object-fit: scale-down;
+  margin-bottom: 30px;
+  border-radius: 4px;
+}
+
+
+.character-total {
+  font-weight: 600;
+  font-size: 14px;
+  color: #817D7D;
+}
+
+.exp-level-input, .character-input {
+  color: transparent;
+  cursor: default;
+}
+
+
+.select-list p:hover, .character-div:hover {
   background: #F7F7F9;
+  cursor: pointer;
 }
 
 .select-list .selected {
   font-weight: 600;
 }
 
-.select-vector.rotate {
+.select-vector {
+  margin-left: -40px;
+  cursor: pointer;
+}
+
+.select-vector:hover {
+  transform: scale(1.3);
+}
+
+.rotate {
   transform: rotate(-180deg);
 }
+
+.rotate:hover {
+  transform: rotate(-180deg) scale(1.3);
+}
+
 
 
