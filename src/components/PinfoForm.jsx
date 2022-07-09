@@ -1,14 +1,11 @@
-import React, { useEffect, useState, useRef, createContext } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import CheckMark from './CheckMark';
 import ErrorPopup from './ErrorPopup';
 import FormHeader from './FormHeader';
 import DoneVector from '/assets/done-vector.png';
 import NextVector from '/assets/btn-vector.png';
-
-
-
-export const Context = createContext();
+import {Context} from '../App';
 
 function PinfoForm(){
 
@@ -26,7 +23,7 @@ function PinfoForm(){
 	const [allValid, setAllValid] = useState();
 	const [submitted, setSubmitted] = useState();
 
-	const [error, setError] = useState();
+	const {error, setError} = useContext(Context);
 
 	const pinfoRect = useRef();
 	const nameRef = useRef();
@@ -156,6 +153,7 @@ function PinfoForm(){
 
 		if(nameRef.current.checkValidity() && emailRef.current.checkValidity() && numberRef.current.checkValidity() && dobRef.current.checkValidity()) {
 			navigate("/experience-information");	
+			setError();
 		}
 	}
 
@@ -172,7 +170,7 @@ function PinfoForm(){
         		</div>
         		<div className="wizard-hr"></div>
         		<div className="wizard-exp-div">
-	        		<div className={localStorage.getItem("exp-started") == 'true' ? 'exp-rect done' : 'exp-rect not-current'}>2</div>
+	        		<div className={localStorage.getItem("exp-started") == 'true' ? 'exp-rect done' : 'exp-rect not-current'}>{localStorage.getItem("exp-done") == 'true' ? <img className="done-vector" src={DoneVector}></img> : '2'}</div>
 	        		<span className="wizard-exp">Chess experience</span>
         		</div>
     		</div>
@@ -185,9 +183,7 @@ function PinfoForm(){
 				<div onChange={()=>{
 					storeInfo()}} className="pinfo-form">
 
-					{error && 
-						<Context.Provider value={{error, setError}}> <ErrorPopup />
-						</Context.Provider>}
+					{error && <ErrorPopup />}
 
 					<div className={nameValid != false ? "name-div" : "name-div error-input"}>
 						
@@ -217,7 +213,7 @@ function PinfoForm(){
 						{dobValid && <CheckMark />}
 					</div>
 					<div className="pinfo-buttons">
-						<Link to="/"><button className="btn-back">Back</button></Link>
+						<Link onClick={()=> setError()} to="/"><button className="btn-back">Back</button></Link>
 						<button onClick={()=> {checkForm()}} className="btn-next">Next &nbsp; <img src={NextVector}></img> </button>
 					</div>
 					

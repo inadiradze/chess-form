@@ -1,20 +1,23 @@
-import React, {useState, useRef, createContext, useEffect} from 'react';
+import React, {useState, useRef, useContext, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import FormHeader from './FormHeader';
+import ErrorPopup from './ErrorPopup';
 import SelectVector from '/assets/select-vector.png';
 import DoneVector from '/assets/done-vector.png';
 import NextVector from '/assets/btn-vector.png';
-import ErrorPopup from './ErrorPopup';
+import {Context} from '../App';
 
 
 function ExpForm(){
 
+	const navigate = useNavigate();
 	const [showLevelBox, setShowLevelBox] = useState(false);
 	const [showCharacterBox, setShowCharacterBox] = useState(false);
-	const [error, setError] = useState();
 	const [levelValue, setLevelValue] = useState("");
 	const [characterValue, setCharacterValue] = useState("");
 	const [characters, setCharacters] = useState([]);
+	const [allValid, setAllValid] = useState(false);
+	const {error, setError} = useContext(Context);
 
 	const vectorRef = useRef();
 	const characterVectorRef = useRef();
@@ -36,6 +39,7 @@ function ExpForm(){
 		showCharacterValue();
 		showAnswer();
 		disableQuestionOverlay();
+		checkAllInputs();
 	});
 
 
@@ -98,12 +102,19 @@ function ExpForm(){
 	}
 
 	function checkForm(){
-		if(!levelValue && !characterValue){
+
+		if(!levelValue){
 			setError({
-				input: 'level or character',
-				error: 'Please enter a valid level and character'
-			});
-		}
+				input: 'level of knowledge',
+				error: 'Please choose your chess knowledge level'
+		})}else if(!characterValue){
+			setError({
+				input: 'character',
+				error: 'Please choose your player'
+		})}else{
+				navigate("/onboarding");
+				setError();
+			}
 	}
 
 	function LevelBox(){
@@ -133,13 +144,20 @@ function ExpForm(){
 		)
 	}
 
+	function checkAllInputs(){
+		if(levelValue && characterValue){
+			setAllValid(true);
+			localStorage.setItem("exp-done", true);
+		}
+	}
+
 	function Question(){
 		return (
 			<div className="question">
 				<p className="question-p"> Have you participated in the Redberry Championship? <span className="input-warn">*</span></p>
 				<input ref={yesRef} onClick={(e) => checkQuestion(e)} value="yes" required type="radio" name="question" id="question-yes"></input>
 				<label htmlFor="question-yes">Yes</label>
-				<input ref={noRef} onClick={(e) => checkQuestion(e)} value="no" required type="radio" name="question" id="question-no"></input>
+				<input defaultChecked={true} ref={noRef} onClick={(e) => checkQuestion(e)} value="no" required type="radio" name="question" id="question-no"></input>
 				<label htmlFor="question-no">No</label>
 			</div>
 		)
@@ -155,7 +173,7 @@ function ExpForm(){
 	    		</div>
 	    		<div className="wizard-hr"></div>
 	    		<div className="wizard-exp-div">
-	        		<div ref={expRectRef}className={localStorage.getItem("exp-started") == 'true' ? 'exp-rect done' : 'exp-rect'}><strong>2</strong></div>
+	        		<div ref={expRectRef}className={localStorage.getItem("exp-started") == 'true' ? 'exp-rect done' : 'exp-rect'}>{!allValid ? <strong>2</strong> : <img className="done-vector" src={DoneVector}></img>}</div>
 	        		<span className="wizard-exp">Chess experience</span>
 	    		</div>
 			</div>
@@ -170,10 +188,9 @@ function ExpForm(){
 				<FormHeader header={'Chess experience'} />
 				<div onClick={()=> {
 						localStorage.setItem("exp-started", 'true')}} className="exp-info-form">
-						{error && 
-						<Context.Provider value={{error, setError}}> <ErrorPopup />
-						</Context.Provider>}
+						 
 					<div className="exp-info-list">
+						{error && <ErrorPopup />}
 						<span ref={levelphRef}className="exp-placeholder">Level of knowledge <span className="input-warn">*</span></span>
 						<input ref={levelRef} disabled className="exp-level-input"></input>
 						<img className="select-vector" ref={vectorRef}onClick={(e)=> {setShowLevelBox(!showLevelBox); e.currentTarget.classList.toggle("rotate")}} src={SelectVector}></img>
@@ -191,7 +208,7 @@ function ExpForm(){
 						</div>
 				</div>
 				<div className="pinfo-buttons exp-buttons">
-					<Link to="/personal-information"><button className="btn-back exp-back">Back</button></Link>
+					<Link onClick={()=> setError()} to="/personal-information"><button className="btn-back exp-back">Back</button></Link>
 					<button onClick={() => {checkForm()}} className="btn-next btn-done">Done</button>
 				</div>
 			</div>

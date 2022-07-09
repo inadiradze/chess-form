@@ -1,8 +1,7 @@
 import React, {useContext, useState, useRef, useEffect} from 'react';
-import {Context} from './PinfoForm';
 import ErrorVector from '/assets/error-vector.png';
 import CloseBtn from '/assets/close-btn.png';
-
+import {Context} from '../App';
 
 
 
@@ -20,6 +19,7 @@ function ErrorPopup(){
 
 	function closeError(){
 		popupRef.current.style.display="none";
+		setError();
 	}
 
 	return (
