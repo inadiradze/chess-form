@@ -1,15 +1,17 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, createContext, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import FormHeader from './FormHeader';
 import SelectVector from '/assets/select-vector.png';
 import DoneVector from '/assets/done-vector.png';
 import NextVector from '/assets/btn-vector.png';
+import ErrorPopup from './ErrorPopup';
 
 
 function ExpForm(){
 
 	const [showLevelBox, setShowLevelBox] = useState(false);
 	const [showCharacterBox, setShowCharacterBox] = useState(false);
+	const [error, setError] = useState();
 	const [levelValue, setLevelValue] = useState("");
 	const [characterValue, setCharacterValue] = useState("");
 	const [characters, setCharacters] = useState([]);
@@ -33,6 +35,7 @@ function ExpForm(){
 		showLevelValue();
 		showCharacterValue();
 		showAnswer();
+		disableQuestionOverlay();
 	});
 
 
@@ -57,13 +60,11 @@ function ExpForm(){
 	function handleListClick(e){
 		setShowLevelBox(false); 
 		vectorRef.current.classList.remove("rotate"); 
-		questionRef.current.classList.remove("no-overlay")
 	}
 
 	function handleCharacterClick(e){
 		setShowCharacterBox(false); 
 		characterVectorRef.current.classList.remove("rotate"); 
-		questionRef.current.classList.remove("no-overlay")
 		localStorage.setItem("character", e.currentTarget.textContent);
 		localStorage.setItem("character-id", e.currentTarget.id);
 	}
@@ -83,8 +84,25 @@ function ExpForm(){
 	function showAnswer(){
 		if(localStorage.getItem("answer") == 'true'){
 			yesRef.current.checked=true;
-		}else{
+		}else if(localStorage.getItem("answer") == 'false'){
 			noRef.current.checked=true;
+		}
+	}
+
+	function disableQuestionOverlay(){
+		if(showLevelBox || showCharacterBox){
+			questionRef.current.classList.add("no-overlay");
+		}else{
+			questionRef.current.classList.remove("no-overlay");
+		}
+	}
+
+	function checkForm(){
+		if(!levelValue && !characterValue){
+			setError({
+				input: 'level or character',
+				error: 'Please enter a valid level and character'
+			});
 		}
 	}
 
@@ -137,7 +155,7 @@ function ExpForm(){
 	    		</div>
 	    		<div className="wizard-hr"></div>
 	    		<div className="wizard-exp-div">
-	        		<div ref={expRectRef}className='exp-rect'><strong>2</strong></div>
+	        		<div ref={expRectRef}className={localStorage.getItem("exp-started") == 'true' ? 'exp-rect done' : 'exp-rect'}><strong>2</strong></div>
 	        		<span className="wizard-exp">Chess experience</span>
 	    		</div>
 			</div>
@@ -150,28 +168,32 @@ function ExpForm(){
 
 			<div className="info-form-div">
 				<FormHeader header={'Chess experience'} />
-				<div className="exp-info-form">
+				<div onClick={()=> {
+						localStorage.setItem("exp-started", 'true')}} className="exp-info-form">
+						{error && 
+						<Context.Provider value={{error, setError}}> <ErrorPopup />
+						</Context.Provider>}
 					<div className="exp-info-list">
 						<span ref={levelphRef}className="exp-placeholder">Level of knowledge <span className="input-warn">*</span></span>
 						<input ref={levelRef} disabled className="exp-level-input"></input>
-						<img className="select-vector" ref={vectorRef} onClick={(e)=> {setShowLevelBox(!showLevelBox); e.currentTarget.classList.toggle("rotate"); questionRef.current.classList.toggle("no-overlay")}} src={SelectVector}></img>
+						<img className="select-vector" ref={vectorRef}onClick={(e)=> {setShowLevelBox(!showLevelBox); e.currentTarget.classList.toggle("rotate")}} src={SelectVector}></img>
 						{showLevelBox && <LevelBox />}
 					</div>
 
 					<div className="character-info-list">
 						<span ref={characterphRef}className="character-placeholder">Choose your character <span className="input-warn">*</span></span>
 						<input ref={characterRef} disabled className="character-input"></input>
-						<img className="select-vector" ref={characterVectorRef} onClick={(e)=> {setShowCharacterBox(!showCharacterBox); e.currentTarget.classList.toggle("rotate"); questionRef.current.classList.toggle("no-overlay")}} src={SelectVector}></img>
+						<img className="select-vector" ref={characterVectorRef} onClick={(e)=> {setShowCharacterBox(!showCharacterBox); e.currentTarget.classList.toggle("rotate")}} src={SelectVector}></img>
 						{showCharacterBox && <CharacterBox />}
 						</div>
 						<div ref={questionRef}className="question-div">
 							<Question />
 						</div>
 				</div>
-					<div className="pinfo-buttons exp-buttons">
-						<Link to="/personal-information"><button className="btn-back exp-back">Back</button></Link>
-						<button className="btn-next btn-done">Done</button>
-					</div>
+				<div className="pinfo-buttons exp-buttons">
+					<Link to="/personal-information"><button className="btn-back exp-back">Back</button></Link>
+					<button onClick={() => {checkForm()}} className="btn-next btn-done">Done</button>
+				</div>
 			</div>
 		</div>
 	)

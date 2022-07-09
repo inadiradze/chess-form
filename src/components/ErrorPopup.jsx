@@ -6,6 +6,7 @@ import CloseBtn from '/assets/close-btn.png';
 
 
 
+
 function ErrorPopup(){
 
 	const {error, setError} = useContext(Context);

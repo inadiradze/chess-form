@@ -141,6 +141,7 @@ function PinfoForm(){
 		}
 	}
 
+
 	function storeInfo(){
 		localStorage.setItem("name", nameRef.current.value);
 		localStorage.setItem("email", emailRef.current.value);
@@ -171,7 +172,7 @@ function PinfoForm(){
         		</div>
         		<div className="wizard-hr"></div>
         		<div className="wizard-exp-div">
-	        		<div className="exp-rect not-current">2</div>
+	        		<div className={localStorage.getItem("exp-started") == 'true' ? 'exp-rect done' : 'exp-rect not-current'}>2</div>
 	        		<span className="wizard-exp">Chess experience</span>
         		</div>
     		</div>
