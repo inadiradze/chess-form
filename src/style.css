@@ -50,16 +50,22 @@ body {
   padding: 22px 45px 25px 45px;
 }
 
-.home-div, .pinfo-div, .expinfo-div {
+.home-div, .pinfo-div, .expinfo-div, .onboarding-div {
   display: flex;
 }
 
 
-.home-left, .pinfo-left, .expinfo-left {
+.home-left, .pinfo-left, .expinfo-left, .onboarding-left {
   background-image: url('../assets/landing.png');
+  background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
   width: 48vw;
+}
+
+.onboarding-left {
+  background-image: url('../assets/onboarding-bg.png');
+
 }
 
 .pinfo-left {
@@ -71,14 +77,20 @@ body {
   background-image: url('../assets/exp-pic.png');
 }
 
-.home-right, .pinfo-right {
+.home-right, .pinfo-right, .onboarding-right {
   min-height: 100vh;
   background: #FD5334;
   width: 52vw;
 }
 
-.pinfo-right {
+.pinfo-right, .onboarding-right {
   background: #fff;
+}
+
+.onboarding-img-div {
+ margin-top: 40%;
+ margin-left: 50%;
+ transform: translateX(-50%);
 }
 
 .home-intro {

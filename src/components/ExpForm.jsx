@@ -17,6 +17,7 @@ function ExpForm(){
 	const [characterValue, setCharacterValue] = useState("");
 	const [characters, setCharacters] = useState([]);
 	const [allValid, setAllValid] = useState(false);
+	const [done, setDone] = useState(false);
 	const {error, setError} = useContext(Context);
 
 	const vectorRef = useRef();
@@ -112,9 +113,36 @@ function ExpForm(){
 				input: 'character',
 				error: 'Please choose your player'
 		})}else{
-				navigate("/onboarding");
+				setDone(true);
+				sendForm();
 				setError();
 			}
+	}
+
+	function sendForm(){
+
+		let answer;
+		let level;
+
+		localStorage.getItem("answer") == 'true' ? answer = true : answer = false;
+
+		localStorage.getItem("level") == 'Intermediate' ? level = 'normal' : level = localStorage.getItem("level").toLowerCase();
+
+		fetch("https://chess-tournament-api.devtest.ge/api/register", {
+				method: "POST",
+				headers: {
+					"content-type": "application/json",
+				},
+				body: JSON.stringify({
+				  "name": localStorage.getItem("name"),
+				  "email": localStorage.getItem("email"),
+				  "phone": localStorage.getItem("number"),
+				  "date_of_birth": localStorage.getItem("dob"),
+				  "experience_level": level,
+				  "already_participated": answer,
+				  "character_id": parseInt(localStorage.getItem("character-id"))
+				})
+			}).then(resp => console.log(resp.status)).catch(err=>console.log(err))
 	}
 
 	function LevelBox(){
@@ -134,7 +162,7 @@ function ExpForm(){
 					<span className="character-total">(Total {characters.length})</span>
 					{characters.map((content, index) => {
 		                return (
-						<div onClick={(e) => {handleCharacterClick(e)}}key={index} id={index} className="character-div">
+						<div onClick={(e) => {handleCharacterClick(e)}}key={index} id={content.id} className="character-div">
 							<p> {content.name}</p>
 							<img className="character-img" src={`https://chess-tournament-api.devtest.ge/${content.image}`}></img>
 						</div>
