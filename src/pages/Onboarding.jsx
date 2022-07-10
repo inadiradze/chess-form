@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import Header from '../components/Header';
 import OnboardingDone from '/assets/onboarding-done.png';
 import ErrorPage from './ErrorPage';
@@ -8,6 +8,7 @@ function Onboarding(){
 
 	const {expDone, setExpDone} = useContext(Context);
 	const {pinfoDone, setPinfoDone} = useContext(Context);
+	const [error, setError] = useState(false);
 
 	useEffect( ()=> {
 		if(pinfoDone && expDone){
@@ -38,7 +39,7 @@ function Onboarding(){
 				  "already_participated": answer,
 				  "character_id": parseInt(localStorage.getItem("character-id"))
 				})
-			}).then(resp => console.log(resp.status)).then(localStorage.clear()).catch(err=>console.log(err))
+			}).then(resp => {console.log(resp.status); if(resp.status !== 201){setError(true)}else{localStorage.clear()}}).catch(err=>console.log(err))
 	}
 
 
@@ -52,9 +53,11 @@ function Onboarding(){
 				</div>
 
 				<div className="onboarding-right">
+					{error ?
+						<div className="onboarding-error-div"><p> Something went wrong :( </p></div> :
 					<div className="onboarding-img-div">
 						<img src={OnboardingDone} alt="Onboarding Done"></img>
-					</div>
+					</div>}
 				</div>
 		       
 	        </div>) : <ErrorPage />}

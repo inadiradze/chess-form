@@ -35,6 +35,7 @@ function ExpForm(){
 
 	useEffect( () => {
 		fetchCharacters();
+		checkIfDone();
 	}, []);
 
 	useEffect( () => {
@@ -44,6 +45,10 @@ function ExpForm(){
 		disableQuestionOverlay();
 		checkAllInputs();
 	});
+
+	function checkIfDone(){
+		localStorage.getItem("pinfo-done") == 'true' && setPinfoDone(true);
+	}
 
 
 	function fetchCharacters() {
@@ -105,6 +110,8 @@ function ExpForm(){
 	}
 
 	function checkForm(){
+
+		checkIfDone();
 
 		if(!levelValue){
 			setError({

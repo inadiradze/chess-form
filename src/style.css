@@ -63,6 +63,18 @@ body {
   width: 48vw;
 }
 
+.onboarding-error-div {
+  text-align: center;
+  width: fit-content;
+  font-weight: bold;
+  margin-top: 50%;
+  margin-left: 47%;
+  white-space: nowrap;
+  font-size: 45px;
+  font-family: 'Open Sans';
+  transform: translateX(-50%);
+}
+
 .onboarding-left {
   background-image: url('../assets/onboarding-bg.png');
 }
@@ -87,9 +99,10 @@ body {
 }
 
 .onboarding-img-div {
- margin-top: 40%;
- margin-left: 50%;
- transform: translateX(-50%);
+  width: fit-content;
+  margin-top: 40%;
+  margin-left: 45%;
+  transform: translateX(-50%);
 }
 
 .home-intro {
