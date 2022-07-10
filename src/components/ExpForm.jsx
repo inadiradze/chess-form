@@ -17,7 +17,9 @@ function ExpForm(){
 	const [characterValue, setCharacterValue] = useState("");
 	const [characters, setCharacters] = useState([]);
 	const [allValid, setAllValid] = useState(false);
-	const [done, setDone] = useState(false);
+
+	const {expDone, setExpDone} = useContext(Context);
+	const {pinfoDone, setPinfoDone} = useContext(Context);
 	const {error, setError} = useContext(Context);
 
 	const vectorRef = useRef();
@@ -108,42 +110,24 @@ function ExpForm(){
 			setError({
 				input: 'level of knowledge',
 				error: 'Please choose your chess knowledge level'
-		})}else if(!characterValue){
+			})
+		}else if(!characterValue){
 			setError({
 				input: 'character',
 				error: 'Please choose your player'
-		})}else{
-				setDone(true);
-				sendForm();
+			})
+		}else if(pinfoDone){
+				setExpDone(true);
+				navigate("/onboarding");
 				setError();
-			}
-	}
-
-	function sendForm(){
-
-		let answer;
-		let level;
-
-		localStorage.getItem("answer") == 'true' ? answer = true : answer = false;
-
-		localStorage.getItem("level") == 'Intermediate' ? level = 'normal' : level = localStorage.getItem("level").toLowerCase();
-
-		fetch("https://chess-tournament-api.devtest.ge/api/register", {
-				method: "POST",
-				headers: {
-					"content-type": "application/json",
-				},
-				body: JSON.stringify({
-				  "name": localStorage.getItem("name"),
-				  "email": localStorage.getItem("email"),
-				  "phone": localStorage.getItem("number"),
-				  "date_of_birth": localStorage.getItem("dob"),
-				  "experience_level": level,
-				  "already_participated": answer,
-				  "character_id": parseInt(localStorage.getItem("character-id"))
+		}else if(!pinfoDone){
+				setError({
+					input: 'personal information',
+					error: 'Please fill out the first page'
 				})
-			}).then(resp => console.log(resp.status)).catch(err=>console.log(err))
-	}
+			}
+		}
+
 
 	function LevelBox(){
 		return (

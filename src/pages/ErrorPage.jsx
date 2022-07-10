@@ -2,7 +2,7 @@ import React from 'react';
 
 function ErrorPage(){
 
-	document.title = "Redberry Chess | ERROR";
+	document.title = "Redberry Chess | Error";
 
 	return (
 		<div className="errorpage">

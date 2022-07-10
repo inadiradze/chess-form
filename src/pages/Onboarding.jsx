@@ -1,11 +1,18 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import Header from '../components/Header';
 import OnboardingDone from '/assets/onboarding-done.png';
+import ErrorPage from './ErrorPage';
+import {Context} from '../App';
 
 function Onboarding(){
 
+	const {expDone, setExpDone} = useContext(Context);
+	const {pinfoDone, setPinfoDone} = useContext(Context);
+
 	useEffect( ()=> {
-		sendForm();
+		if(pinfoDone && expDone){
+			sendForm();
+		}
 	}, []);
 
 	function sendForm(){
@@ -31,23 +38,26 @@ function Onboarding(){
 				  "already_participated": answer,
 				  "character_id": parseInt(localStorage.getItem("character-id"))
 				})
-			}).then(resp => console.log(resp.status)).catch(err=>console.log(err))
+			}).then(resp => console.log(resp.status)).then(localStorage.clear()).catch(err=>console.log(err))
 	}
 
 
 	return(
-		<div className="onboarding-div">
+		<div>
+			{pinfoDone && expDone ? (
+			<div className="onboarding-div">
 
-			<div className="onboarding-left">
-				<Header/>
-			</div>
-
-			<div className="onboarding-right">
-				<div className="onboarding-img-div">
-					<img src={OnboardingDone} alt="Onboarding Done"></img>
+				<div className="onboarding-left">
+					<Header/>
 				</div>
-			</div>
-	       
+
+				<div className="onboarding-right">
+					<div className="onboarding-img-div">
+						<img src={OnboardingDone} alt="Onboarding Done"></img>
+					</div>
+				</div>
+		       
+	        </div>) : <ErrorPage />}
         </div>
 	)
 }

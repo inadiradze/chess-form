@@ -24,6 +24,7 @@ function PinfoForm(){
 	const [submitted, setSubmitted] = useState();
 
 	const {error, setError} = useContext(Context);
+	const {pinfoDone, setPinfoDone} = useContext(Context);
 
 	const pinfoRect = useRef();
 	const nameRef = useRef();
@@ -152,8 +153,9 @@ function PinfoForm(){
 		checkInputs();
 
 		if(nameRef.current.checkValidity() && emailRef.current.checkValidity() && numberRef.current.checkValidity() && dobRef.current.checkValidity()) {
-			navigate("/experience-information");	
-			setError();
+				navigate("/experience-information");
+				setPinfoDone(true);	
+				setError();
 		}
 	}
 

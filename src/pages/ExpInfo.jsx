@@ -4,13 +4,14 @@ import InfoHeader from '../components/InfoHeader';
 import ExpForm from '../components/ExpForm';
 
 
+
 function ExpInfo(){
+
+	
 
 	document.title = "Redberry Chess | Experience Information";
 
 	const quote =  <> “Many have become chess masters; <br></br> no one has become the master of chess.” </>;
-
-
 	
 
 	return (
@@ -25,7 +26,6 @@ function ExpInfo(){
 				<InfoHeader header={'First step is done, continue to finish onboarding'} />
 				<ExpForm />
 			</div>
-	       
         </div>
 	)
 }
