@@ -131,6 +131,7 @@ body {
 }
 
 .home-btn button {
+  color: white;
   width: 191px;
   height: 53px;
   padding: 13px 24px;
@@ -369,6 +370,7 @@ body {
 
 .btn-next {
   margin-right: 180px;
+  color: white;
   border: none;
   background: #212529;
   max-width: 128px;
@@ -589,6 +591,7 @@ body {
   margin-right: 152px;
   max-width: 93px;
   max-height: 53px;
+  color: white;
 } 
 
 
